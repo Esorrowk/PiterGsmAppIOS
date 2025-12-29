@@ -9,78 +9,63 @@ import SwiftUI
 
 // главная вкладка
 struct HomeView: View {
-    let katalogList = [
-        "iPhone","iPad","Mac","Умные часы","Аудио",
-        "Смартфоны","Планшеты","Ноутбуки","Аксессуары"
+    // создаём тип данных Category, ID формируется автоматически
+    struct Category: Identifiable {
+        let id = UUID()
+        let title: String
+        let imageName: String
+    }
+    // список с картинками
+    let categoryList: [Category] = [
+        Category(title: "iPhone", imageName: "iPhone"),
+        Category(title: "iPad", imageName: "iPad"),
+        Category(title: "Mac", imageName: "Mac"),
+        Category(title: "Умные часы", imageName: "appleWatch"),
+        Category(title: "Аудио", imageName: "Audio"),
+        Category(title: "Смартфоны", imageName: "smartphone"),
+        Category(title: "Планшеты", imageName: "planshet"),
+        Category(title: "Ноутбуки", imageName: "laptop"),
+        Category(title: "Аксессуары", imageName: "accessories"),
+        
     ]
-
+    // приватная переменная для поисковой строки
+    @State private var searchBar: String = ""
     var body: some View {
         NavigationStack {
+            // вертикальный контейнер для элементов - вертикальный стэк
             VStack {
+                // создание поля ввода с привязкой в searchBar
+                TextField("Поиск", text: $searchBar)
+                    .textFieldStyle(.roundedBorder)
+                    .padding()
+                // отображения списка с картинками
+                // контейнер с горизонтальным прокрутом и полоса прокрутки скрыта
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 15) {
-                        ForEach(katalogList, id: \.self) { item in
-                            Text(item)
+                    // горизонтальный контейнер для элементов - горизонтальный стэк
+                    HStack(spacing: 16) {
+                        // для каждого элемента вертикальный стэк с расстоянием между элементами 6
+                        ForEach(categoryList) { item in
+                            VStack(spacing: 6) {
+                                Image(item.imageName)
+                                    .resizable() // сжатие картинки
+                                    .scaledToFit() // маштабирование картинки
+                                    .frame(width: 32, height: 32)
+
+                                Text(item.title)
+                                    .font(.caption)
+                            }
+                            .padding()
+                            .cornerRadius(14) // скругление
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
                 }
-                Spacer()
+
+                Spacer() // очистка места под
             }
             .navigationTitle("PiterGsm")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.inline) // центрированный маленький размер шапки
         }
-    }
-}
-// каталог
-struct CatalogView: View {
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Каталог")
-                    .font(.title2)
-                    .padding()
-                Spacer()
-            }
-            .navigationTitle("Каталог")
-            .navigationBarTitleDisplayMode(.large)
-        }
-    }
-}
-// корзина
-struct BasketView: View {
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Корзина")
-                    .font(.title2)
-                    .padding()
-                Spacer()
-            }
-            .navigationTitle("Корзина")
-            .navigationBarTitleDisplayMode(.large)
-        }
-    }
-}
-// избранное
-struct FavoritesView: View {
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Избранное")
-                    .font(.title2)
-                    .padding()
-                Spacer()
-            }
-            .navigationTitle("Избранное")
-            .navigationBarTitleDisplayMode(.large)
-        }
-    }
-}
-// профиль
-struct ProfileView: View {
-    var body: some View {
-        Text("Профиль")
     }
 }
 // главный экран

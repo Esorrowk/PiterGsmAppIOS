@@ -1,16 +1,15 @@
 import SwiftUI
-
-// корзина
-struct BasketView: View {
+// каталог
+struct CatalogView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Корзина")
+                Text("Каталог")
                     .font(.title2)
                     .padding()
                 Spacer()
             }
-            .navigationTitle("Корзина")
+            .navigationTitle("Каталог")
             .navigationBarTitleDisplayMode(.large)
         }
     }
