@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  PiterGsmAppIOS
-//
-//  Created by Egor Akentyev on 28.12.2025.
-//
-
 import SwiftUI
 
 // главная вкладка
@@ -30,6 +23,7 @@ struct HomeView: View {
     ]
     // приватная переменная для поисковой строки
     @State private var searchBar: String = ""
+    
     var body: some View {
         NavigationStack {
             // вертикальный контейнер для элементов - вертикальный стэк
@@ -60,7 +54,12 @@ struct HomeView: View {
                     }
                     .padding(.horizontal)
                 }
+                // добавление скролл панели под категории
+                NewItemScrollPanel()
 
+                // включаем paging для скролла по одной картинке
+                .scrollTargetLayout()
+                .scrollTargetBehavior(.paging)
                 Spacer() // очистка места под
             }
             .navigationTitle("PiterGsm")
