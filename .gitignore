@@ -1,66 +1,79 @@
-cat > .gitignore << 'EOF'
-#
-# gitignore для iOS/SwiftUI проекта на Xcode
-#
-
-## Общие
+# --------------------------
+# Общие файлы системы
+# --------------------------
 .DS_Store
 .AppleDouble
 .LSOverride
 Icon?
 ._*
 
-## Xcode
+# Временные файлы
+*.log
+*.tmp
+*.swp
+*.lock
+*.backup
+
+# --------------------------
+# Xcode
+# --------------------------
 *.xcworkspace
 !default.xcworkspace
 xcuserdata/
-*.pbxuser
-*.mode1v3
-*.mode2v3
-*.perspectivev3
-*.xccheckout
-*.moved-aside
 *.xcuserstate
 *.xccheckout
-*.xcscmblueprint
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.hmap
+*.simdevice
+*.simulatorstate
 
-## Производные данные
+# --------------------------
+# Derived Data и сборки
+# --------------------------
 DerivedData/
 build/
 *.ipa
-*.dSYM.zip
 *.dSYM
+*.dSYM.zip
 
-## Swift Package Manager
+# --------------------------
+# Swift Package Manager
+# --------------------------
 Packages/
 Package.resolved
 .swiftpm/
 .checkouts/
 
-## CocoaPods (если используете)
+# --------------------------
+# CocoaPods
+# --------------------------
 Pods/
 !Podfile.lock
 
-## Carthage (если используете)
+# --------------------------
+# Carthage
+# --------------------------
 Carthage/
 !Cartfile.resolved
 
-## Fastlane
+# --------------------------
+# Fastlane
+# --------------------------
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/README.md
 
-## Кодовая покрытие
+# --------------------------
+# Кодовое покрытие
+# --------------------------
 *.profraw
 *.gcda
 *.gcno
 
-## Резервные копии
-*.backup
-*.bk
-
-## Логи
-*.log
-EOF
+# --------------------------
+# SwiftUI
+# --------------------------
+*.preview-thumbnails
+*.index
