@@ -7,18 +7,19 @@ struct HomeView: View {
         let id = UUID()
         let title: String
         let imageName: String
+        let destination: AnyView
     }
     // список с картинками
     let categoryList: [Category] = [
-        Category(title: "iPhone", imageName: "iPhone"),
-        Category(title: "iPad", imageName: "iPad"),
-        Category(title: "Mac", imageName: "Mac"),
-        Category(title: "Умные часы", imageName: "appleWatch"),
-        Category(title: "Аудио", imageName: "Audio"),
-        Category(title: "Смартфоны", imageName: "smartphone"),
-        Category(title: "Планшеты", imageName: "planshet"),
-        Category(title: "Ноутбуки", imageName: "laptop"),
-        Category(title: "Аксессуары", imageName: "accessories"),
+        Category(title: "iPhone", imageName: "iPhone", destination: AnyView(IPhoneScreenView())),
+        Category(title: "iPad", imageName: "iPad", destination: AnyView(IPadScreenView())),
+        Category(title: "Mac", imageName: "Mac", destination: AnyView(MacScreenView())),
+        Category(title: "Умные часы", imageName: "appleWatch", destination: AnyView(AppleWatchScreenView())),
+        Category(title: "Аудио", imageName: "Audio", destination: AnyView(AudioScreenView())),
+        Category(title: "Смартфоны", imageName: "smartphone", destination: AnyView(SmartPhoneScreenView())),
+        Category(title: "Планшеты", imageName: "planshet", destination: AnyView(PlanshetScreenView())),
+        Category(title: "Ноутбуки", imageName: "laptop", destination: AnyView(LaptopScreenView())),
+        Category(title: "Аксессуары", imageName: "accessories", destination: AnyView(AccessoriesScreenView())),
         
     ]
     // приватная переменная для поисковой строки
@@ -39,18 +40,21 @@ struct HomeView: View {
                     HStack(spacing: 16) {
                         // для каждого элемента вертикальный стэк с расстоянием между элементами 6
                         ForEach(categoryList) { item in
-                            VStack(spacing: 6) {
-                                Image(item.imageName)
-                                    .resizable() // сжатие картинки
-                                    .scaledToFit() // маштабирование картинки
-                                    .frame(width: 32, height: 32)
-
-                                Text(item.title)
-                                    .font(.caption)
+                            NavigationLink(destination: item.destination) {
+                                VStack(spacing: 6) {
+                                    Image(item.imageName)
+                                        .resizable() // сжатие картинки
+                                        .scaledToFit() // маштабирование картинки
+                                        .frame(width: 32, height: 32)
+                                    
+                                    Text(item.title)
+                                        .font(.caption)
+                                }
                             }
                             .padding()
                             .cornerRadius(14) // скругление
                         }
+                        .buttonStyle(.plain) // убираем стандартное выделение кнопки
                     }
                     .padding(.horizontal)
                 }
