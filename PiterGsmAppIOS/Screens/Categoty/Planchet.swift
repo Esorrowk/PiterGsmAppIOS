@@ -32,7 +32,7 @@ struct PlanshetScreenView: View {
             }
             .padding()
         }
-        .navigationTitle("iPhone")
+        .navigationTitle("Planshet")
     }
 }
 

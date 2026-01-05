@@ -24,7 +24,7 @@ struct IPadScreenView: View {
         ScrollView {
             VStack(spacing: 16) {
                 ForEach(iPades) { phone in
-                    IPhoneCardView(
+                    IPadCardView(
                         productName: phone.name,
                         productDescription: phone.description,
                         productImageName: phone.imageName,
@@ -34,7 +34,7 @@ struct IPadScreenView: View {
             }
             .padding()
         }
-        .navigationTitle("iPhone")
+        .navigationTitle("IPad")
     }
 }
 

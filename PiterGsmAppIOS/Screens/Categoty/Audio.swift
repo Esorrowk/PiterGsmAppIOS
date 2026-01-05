@@ -34,7 +34,7 @@ struct AudioScreenView: View {
             }
             .padding()
         }
-        .navigationTitle("iPhone")
+        .navigationTitle("Audio")
     }
 }
 

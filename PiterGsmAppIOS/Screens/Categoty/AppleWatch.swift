@@ -34,7 +34,7 @@ struct AppleWatchScreenView: View {
             }
             .padding()
         }
-        .navigationTitle("iPhone")
+        .navigationTitle("Apple Watch")
     }
 }
 

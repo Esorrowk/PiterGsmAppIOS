@@ -33,7 +33,7 @@ struct AccessoriesScreenView: View {
             }
             .padding()
         }
-        .navigationTitle("iPhone")
+        .navigationTitle("Accessories")
     }
 }
 

@@ -32,7 +32,7 @@ struct SmartPhoneScreenView: View {
             }
             .padding()
         }
-        .navigationTitle("iPhone")
+        .navigationTitle("Smartphone")
     }
 }
 

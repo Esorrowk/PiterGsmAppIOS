@@ -32,7 +32,7 @@ struct MacScreenView: View {
             }
             .padding()
         }
-        .navigationTitle("iPhone")
+        .navigationTitle("Mac")
     }
 }
 
