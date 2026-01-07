@@ -26,6 +26,7 @@ struct NewItemScrollPanel: View {
                 .scaledToFit()
                 .frame(height: 250)
                 .frame(maxWidth: .infinity)
+                .cornerRadius(12)
             
             // стрелки поверх картинки
             HStack {
