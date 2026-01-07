@@ -29,10 +29,7 @@ struct HomeView: View {
         NavigationStack {
             // вертикальный контейнер для элементов - вертикальный стэк
             VStack {
-                // создание поля ввода с привязкой в searchBar
-                TextField("Поиск", text: $searchBar)
-                    .textFieldStyle(.roundedBorder)
-                    .padding()
+    
                 // отображения списка с картинками
                 // контейнер с горизонтальным прокрутом и полоса прокрутки скрыта
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -46,7 +43,6 @@ struct HomeView: View {
                                         .resizable() // сжатие картинки
                                         .scaledToFit() // маштабирование картинки
                                         .frame(width: 32, height: 32)
-                                    
                                     Text(item.title)
                                         .font(.caption)
                                 }
@@ -73,6 +69,7 @@ struct HomeView: View {
 }
 // главный экран
 struct MainView: View {
+    @State private var showSearch = false
     var body: some View {
         TabView {
             HomeView()
@@ -80,11 +77,13 @@ struct MainView: View {
                     Image(systemName: "house.fill")
                     Text("Главная")
                 }
+/*
             CatalogView()
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Каталог")
                 }
+ */
             
             BasketView()
                 .tabItem {
@@ -101,11 +100,30 @@ struct MainView: View {
                     Image(systemName: "person.fill")
                     Text("Профиль")
                 }
+            VStack{
+                Spacer()
+                Button{
+                    showSearch = true
+                } label: {
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 22, weight: .semibold))
+                        .foregroundColor(.primary)
+                        .frame(width: 56, height: 56)
+                        .background(.ultraThinMaterial)
+                        .clipShape(Circle())
+                        .shadow(radius: 10)
+                }
+                .padding(.bottom, 28)
+            }
+        }
+        .sheet(isPresented: $showSearch){
+            SearchView()
         }
         .tint(.blue)
-
+        
     }
 }
+    
 
 
 #Preview {

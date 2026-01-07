@@ -8,6 +8,7 @@ struct BasketView: View {
                 Text("Корзина")
                     .font(.title2)
                     .padding()
+                    .glassEffect()
                 Spacer()
             }
             .navigationTitle("Корзина")

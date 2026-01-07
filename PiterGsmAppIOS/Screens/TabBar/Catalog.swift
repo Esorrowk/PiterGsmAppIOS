@@ -7,6 +7,7 @@ struct CatalogView: View {
                 Text("Каталог")
                     .font(.title2)
                     .padding()
+                    .glassEffect()
                 Spacer()
             }
             .navigationTitle("Каталог")

@@ -7,6 +7,7 @@ struct ProfileView: View {
                 Text("Профиль")
                     .font(.title2)
                     .padding()
+                    .glassEffect()
                 Spacer()
             }
             .navigationTitle("Профиль")

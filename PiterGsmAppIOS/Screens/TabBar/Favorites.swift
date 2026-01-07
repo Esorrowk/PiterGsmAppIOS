@@ -8,6 +8,7 @@ struct FavoritesView: View {
                 Text("Избранное")
                     .font(.title2)
                     .padding()
+                    .glassEffect()
                 Spacer()
             }
             .navigationTitle("Избранное")
