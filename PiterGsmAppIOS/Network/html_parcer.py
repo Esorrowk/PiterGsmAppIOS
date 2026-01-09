@@ -21,7 +21,7 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X)"}
 products = []
 
 for url in urls:
-    response = requests.get(url, headers=HEADERS)
+    response = requests.get(url, headers=HEADERS, timeout=10)
     if response.status_code != 200:
         print(f'Ошибка при получении страницы {url}: {response.status_code}')
         continue
@@ -29,22 +29,37 @@ for url in urls:
     print(f'Парсим страницу: {url}')
     soup = BeautifulSoup(response.text, "html.parser")
 
-    # На каждой странице ищем товары в li.hcatsublist__item
+    # На каждой странице ищем товары
     items = soup.select("li.hcatsublist__item")
 
     for item in items:
-        name_tag = item.select_one("span.hcatsublist__text")
         link_tag = item.select_one("a.hcatsublist__link")
         img_tag = item.select_one("img.hcatsublist__pic-img")
-        price_tag = item.select_one("div.prodcard__price span")
 
-        if not name_tag or not link_tag or not img_tag:
+        if not link_tag or not img_tag:
             continue
 
-        name = name_tag.text.strip()
+        # Ссылка и картинка
         link = HOME_URL + link_tag["href"]
         img = HOME_URL + img_tag["src"]
-        price = price_tag.text.strip() if price_tag else "Цена не указана"
+
+        # Заходим на страницу товара для полного названия и цены
+        try:
+            product_resp = requests.get(link, headers=HEADERS, timeout=10)
+            product_soup = BeautifulSoup(product_resp.text, "html.parser")
+
+            # Полное название
+            full_name_tag = product_soup.select_one("a.prodcard__name") or product_soup.select_one("h1.prodcard__name")
+            name = full_name_tag.text.strip() if full_name_tag else "Нет названия"
+
+            # Цена
+            price_tag = product_soup.select_one("div.prodcard__price span") or product_soup.select_one("div.prodcard__price")
+            price = price_tag.text.strip() if price_tag else "Цена не указана"
+
+        except Exception as e:
+            print(f"Ошибка при получении данных товара {link}: {e}")
+            name = "Нет названия"
+            price = "Цена не указана"
 
         products.append({
             "name": name,
@@ -53,6 +68,7 @@ for url in urls:
             "price": price
         })
 
+# Сохраняем в JSON
 with open("products.json", "w", encoding="utf-8") as f:
     json.dump(products, f, ensure_ascii=False, indent=2)
 
