@@ -1,5 +1,14 @@
 import SwiftUI
 
+// модель данных
+struct Product: Identifiable, Decodable{
+    let id = UUID()
+    let name: String
+    let image: String
+    let price: String
+    let url: String
+}
+
 struct IPhone: Identifiable {
     let id = UUID()
     let name: String
