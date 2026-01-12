@@ -1,17 +1,36 @@
 import SwiftUI
 // профиль
+
 struct ProfileView: View {
+    @State private var login = ""
+    @State private var password = ""
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("Профиль")
-                    .font(.title2)
-                    .padding()
-                    .glassEffect()
-                Spacer()
+        VStack{
+            TextField("login", text : $login)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .frame(maxWidth: .infinity)
+                .frame(height: 30)
+
+            
+            SecureField("password", text : $password)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .frame(maxWidth: .infinity)
+
+            
+            Button("Войти"){
             }
-            .navigationTitle("Профиль")
-            .navigationBarTitleDisplayMode(.large)
+            .frame(maxWidth: .infinity)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .padding()
+            .background(Color.green)
+            .buttonStyle(.plain)
+            .cornerRadius(10)
+
         }
+            .navigationTitle("Вход с паролем")
+            .navigationBarTitleDisplayMode(.large)
+
     }
 }
+
+
