@@ -44,6 +44,8 @@ struct HomeView: View {
                     .scrollTargetBehavior(.paging)
                     
                     Text("Популярные товары")
+                        .frame(maxWidth: .infinity ,alignment: .leading)
+                        .padding(.horizontal)
                     
                     PopularItemsScrollPanel()
                     Spacer() // очистка места под
