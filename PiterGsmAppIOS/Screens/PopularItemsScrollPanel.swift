@@ -33,15 +33,16 @@ struct PopularItemsScrollPanel: View{
                     VStack(alignment:.leading, spacing: 8){
                         Image(item.imageName)
                             .resizable()
-                            .frame(width: 250, height: 300)
+                            .frame(width: 250, height: 250)
                             .cornerRadius(10)
-                        Text(item.imageName)
+                        Text(item.itemName)
                             .font(.caption)
+                            .lineLimit(2)
                         Text("\(item.price) ₽")
                             .font(.headline)
                     }
                     .padding()
-                    .frame(width: 220)
+                    .frame(width: 300)
                     .background(Color.white)
                     .cornerRadius(12)
                     .overlay(
