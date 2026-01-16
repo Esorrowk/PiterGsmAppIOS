@@ -1,13 +1,7 @@
 import SwiftUI
 
 // модель данных
-struct Product: Identifiable, Decodable{
-    let id = UUID()
-    let name: String
-    let image: String
-    let price: String
-    let url: String
-}
+
 
 struct IPhone: Identifiable {
     let id = UUID()
@@ -21,15 +15,20 @@ struct IPhoneScreenView: View {
     
     // Список айфонов
     let iphones: [IPhone] = [
-        IPhone(name: "iPhone 17", description: "Новый iPhone с суперкамерой", imageName: "iPhone17", price: 129999),
-        IPhone(name: "iPhone 17 Pro", description: "Премиум версия", imageName: "iPhone17Pro", price: 149999),
-        IPhone(name: "iPhone Air", description: "Лёгкий и стильный", imageName: "iPhoneAir", price: 109999),
-        IPhone(name: "iPhone SE", description: "Бюджетная модель", imageName: "iPhoneSE", price: 69999)
+        IPhone(name: "iPhone 17", description: "Новый iPhone с суперкамерой", imageName: "Iphone17", price: 129_999),
+        IPhone(name: "iPhone 17 Pro", description: "Премиум версия", imageName: "Iphone17Pro", price: 149_999),
+        IPhone(name: "iPhone Air", description: "Лёгкий и стильный", imageName: "IphoneAir", price: 109_999),
+        IPhone(name: "iPhone SE", description: "Бюджетная модель", imageName: "IphoneSE", price: 24_990)
+    ]
+    
+    let columns = [
+        GridItem(.flexible(), spacing: 16),
+        GridItem(.flexible(), spacing: 16)
     ]
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 16) {
+            LazyVGrid(columns: columns, spacing: 16) {
                 ForEach(iphones) { phone in
                     IPhoneCardView(
                         productName: phone.name,
@@ -53,22 +52,23 @@ struct IPhoneCardView: View {
     let productPrice: Double
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
+            // Картинка сверху
             Image(productImageName)
                 .resizable()
                 .scaledToFit()
-                .frame(height: 200)
+                .frame(height: 150)
                 .cornerRadius(10)
             
+            // Название продукта
             Text(productName)
                 .font(.headline)
+                .bold()
+                .lineLimit(2)
             
-            Text(productDescription)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            
-            Text("\(productPrice, specifier: "%.0f") ₽")
-                .font(.subheadline)
+            // Цена
+            Text("\(Int(productPrice)) ₽")
+                .font(.headline)
                 .foregroundColor(.blue)
         }
         .padding()
