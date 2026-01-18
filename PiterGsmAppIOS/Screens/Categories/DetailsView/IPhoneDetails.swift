@@ -10,7 +10,7 @@ struct IPhoneDetailsView: View {
                     .scaledToFit()
                     .fontWeight(.bold)
                     .multilineTextAlignment(.leading)
-                    .padding(50)
+                    .padding(.leading,50)
                 Text(phone.description)
                     .fontWeight(.regular)
                     .multilineTextAlignment(.leading)
@@ -25,11 +25,10 @@ struct IPhoneDetailsView: View {
                 }){
                     Text("Добавить в корзину")
                 }
-                .frame(maxWidth: 200,alignment: .center)
-                .padding()
-                .background(Color.green)
-                .buttonStyle(.plain)
-                .cornerRadius(10)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .buttonStyle(.borderedProminent)
+                .tint(.green)
+                .controlSize(.large)
 
             }
             .padding()
