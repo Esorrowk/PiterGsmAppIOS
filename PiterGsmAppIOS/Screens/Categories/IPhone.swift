@@ -8,7 +8,7 @@ struct IPhone: Identifiable {
     let name: String
     let description: String
     let imageName: String
-    let price: Double
+    let price: Int
 }
 
 struct IPhoneScreenView: View {
@@ -27,18 +27,24 @@ struct IPhoneScreenView: View {
     ]
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(iphones) { phone in
-                    IPhoneCardView(
-                        productName: phone.name,
-                        productDescription: phone.description,
-                        productImageName: phone.imageName,
-                        productPrice: phone.price
-                    )
+        NavigationStack{
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(iphones) { phone in
+                        NavigationLink{
+                            IPhoneDetailsView(phone: phone)
+                        }label: {
+                            IPhoneCardView(
+                                productName: phone.name,
+                                productDescription: phone.description,
+                                productImageName: phone.imageName,
+                                productPrice: phone.price
+                            )
+                        }
+                    }
                 }
+                .padding()
             }
-            .padding()
         }
         .navigationTitle("iPhone")
     }
@@ -49,7 +55,7 @@ struct IPhoneCardView: View {
     let productName: String
     let productDescription: String
     let productImageName: String
-    let productPrice: Double
+    let productPrice: Int
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
