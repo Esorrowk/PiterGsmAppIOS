@@ -59,6 +59,7 @@ struct HomeView: View {
 // главный экран
 struct MainView: View {
     @State private var showSearch = false
+    @State private var cart = CartManager()
     var body: some View {
         TabView {
             HomeView()
@@ -96,7 +97,7 @@ struct MainView: View {
                 }
         }
         .tint(.blue)
-        
+        .environment(cart)
     }
 }
     

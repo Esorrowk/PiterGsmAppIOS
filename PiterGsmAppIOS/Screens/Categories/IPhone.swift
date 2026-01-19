@@ -3,22 +3,22 @@ import SwiftUI
 // модель данных
 
 
-struct IPhone: Identifiable {
-    let id = UUID()
-    let name: String
-    let description: String
-    let imageName: String
-    let price: Int
+public struct Product: Identifiable {
+    public let id = UUID()
+    public let name: String
+    public let description: String
+    public let imageName: String
+    public let price: Int
 }
 
 struct IPhoneScreenView: View {
-    
+    @Environment(CartManager.self) private var cartManager
     // Список айфонов
-    let iphones: [IPhone] = [
-        IPhone(name: "iPhone 17", description: "Новый iPhone с суперкамерой", imageName: "Iphone17", price: 129_999),
-        IPhone(name: "iPhone 17 Pro", description: "Премиум версия", imageName: "Iphone17Pro", price: 149_999),
-        IPhone(name: "iPhone Air", description: "Лёгкий и стильный", imageName: "IphoneAir", price: 109_999),
-        IPhone(name: "iPhone SE", description: "Бюджетная модель", imageName: "IphoneSE", price: 24_990)
+    let iphones: [Product] = [
+        Product(name: "iPhone 17", description: "Новый iPhone с суперкамерой", imageName: "Iphone17", price: 129_999),
+        Product(name: "iPhone 17 Pro", description: "Премиум версия", imageName: "Iphone17Pro", price: 149_999),
+        Product(name: "iPhone Air", description: "Лёгкий и стильный", imageName: "IphoneAir", price: 109_999),
+        Product(name: "iPhone SE", description: "Бюджетная модель", imageName: "IphoneSE", price: 24_990)
     ]
     
     let columns = [

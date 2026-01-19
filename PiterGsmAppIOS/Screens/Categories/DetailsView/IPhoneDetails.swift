@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct IPhoneDetailsView: View {
-    let phone: IPhone
+    let phone: Product
+    @Environment(CartManager.self) private var cartManager
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -22,6 +24,7 @@ struct IPhoneDetailsView: View {
                     .padding(.leading, 50)
                 Button(action: {
                     print("Предмет \(phone.name) Добавлен в корзину")
+                    addToBasket(phone)
                 }){
                     Text("Добавить в корзину")
                 }
@@ -37,4 +40,9 @@ struct IPhoneDetailsView: View {
         .navigationBarTitleDisplayMode(.inline)
         
     }
+    func addToBasket(_ item: Product){
+        cartManager.items.append(item)
+        print("Предмет \(item.name) добавлен в корзину. Всего: \(cartManager.items.count)")
+    }
 }
+
