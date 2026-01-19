@@ -9,21 +9,28 @@ struct BasketView: View {
                 if cartManager.items.isEmpty{
                     ContentUnavailableView("Корзина пуста", systemImage: "cart")
                 }else{
-                    List(cartManager.items) { item in
-                        HStack{
-                            VStack(alignment: .leading){
-                                Text(item.name)
-                                    .font(.headline)
-                                Text("\(item.price) ₽")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                Image(item.imageName)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 100)
+                    List{
+                        ForEach(cartManager.items){ item in
+                            HStack{
+                                VStack(alignment: .leading){
+                                    Text(item.name)
+                                        .font(.headline)
+                                    Text("\(item.price) ₽")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                    Image(item.imageName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 100)
+                                    Button(role: .destructive) {
+                                        print("\(item.name) удален из корзины")
+                                        cartManager.removeToCart(product: item)
+                                    } label: {
+                                        Label("Удалить", systemImage: "trash")
+                                    }
+                                }
                             }
                         }
-
                     }
                     .listStyle(.plain)
                 }
@@ -31,12 +38,18 @@ struct BasketView: View {
                     Button("Оформить заказ"){
                         
                     }
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .buttonStyle(.borderedProminent)
-                    .padding()
+                    .tint(.green)
+                    .controlSize(.large)
                 }
             }
             .navigationTitle("Корзина")
             .navigationBarTitleDisplayMode(.large)
         }
+    }
+    // Вынесли функцию из тела body
+    private func deleteItems(at offsets: IndexSet) {
+        cartManager.items.remove(atOffsets: offsets)
     }
 }

@@ -3,7 +3,7 @@ import SwiftUI
 // модель данных
 
 
-public struct Product: Identifiable {
+public struct Product: Identifiable, Equatable {
     public let id = UUID()
     public let name: String
     public let description: String
