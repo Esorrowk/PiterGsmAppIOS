@@ -11,13 +11,10 @@ struct BasketView: View {
                 }else{
                     List{
                         ForEach(cartManager.items){ item in
-                            HStack{
+                            HStack(){
                                 VStack(alignment: .leading){
                                     Text(item.name)
                                         .font(.headline)
-                                    Text("\(item.price) ₽")
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
                                     Image(item.imageName)
                                         .resizable()
                                         .scaledToFit()
@@ -29,7 +26,11 @@ struct BasketView: View {
                                         Label("Удалить", systemImage: "trash")
                                     }
                                 }
+                                Text("\(item.price) ₽")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.black)
                             }
+                            
                         }
                     }
                     .listStyle(.plain)
