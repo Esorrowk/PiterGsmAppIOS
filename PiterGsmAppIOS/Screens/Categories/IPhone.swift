@@ -1,8 +1,6 @@
 import SwiftUI
 
-// модель данных
-
-
+// Модель данных
 public struct Product: Identifiable, Equatable {
     public let id = UUID()
     public let name: String
@@ -11,8 +9,10 @@ public struct Product: Identifiable, Equatable {
     public let price: Int
 }
 
+// Экран iPhone
 struct IPhoneScreenView: View {
     @Environment(CartManager.self) private var cartManager
+
     // Список айфонов
     let iphones: [Product] = [
         Product(name: "iPhone 17", description: "Новый iPhone с суперкамерой", imageName: "Iphone17", price: 129_999),
@@ -27,53 +27,43 @@ struct IPhoneScreenView: View {
     ]
     
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(iphones) { phone in
-                        NavigationLink{
-                            IPhoneDetailsView(phone: phone)
-                        }label: {
-                            IPhoneCardView(
-                                productName: phone.name,
-                                productDescription: phone.description,
-                                productImageName: phone.imageName,
-                                productPrice: phone.price
-                            )
+                        NavigationLink {
+                            // Экран деталей для конкретного телефона
+                            ProductsDetailsView(product: phone)
+                        } label: {
+                            ProductCardView(product: phone)
                         }
                     }
                 }
                 .padding()
             }
+            .navigationTitle("iPhone")
         }
-        .navigationTitle("iPhone")
     }
 }
 
-struct IPhoneCardView: View {
-    
-    let productName: String
-    let productDescription: String
-    let productImageName: String
-    let productPrice: Int
+// Универсальная карточка
+struct ProductCardView: View {
+    let product: Product
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Картинка сверху
-            Image(productImageName)
+            Image(product.imageName)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 150)
                 .cornerRadius(10)
             
-            // Название продукта
-            Text(productName)
+            Text(product.name)
                 .font(.headline)
                 .bold()
                 .lineLimit(2)
             
-            // Цена
-            Text("\(Int(productPrice)) ₽")
+            Text("\(product.price) ₽")
                 .font(.headline)
                 .foregroundColor(.blue)
         }
