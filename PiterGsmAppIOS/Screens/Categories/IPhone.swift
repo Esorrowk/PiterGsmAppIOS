@@ -45,31 +45,3 @@ struct IPhoneScreenView: View {
         }
     }
 }
-
-// Универсальная карточка
-struct ProductCardView: View {
-    let product: Product
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Image(product.imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 150)
-                .cornerRadius(10)
-            
-            Text(product.name)
-                .font(.headline)
-                .bold()
-                .lineLimit(2)
-            
-            Text("\(product.price) ₽")
-                .font(.headline)
-                .foregroundColor(.blue)
-        }
-        .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
-        .shadow(radius: 2)
-    }
-}
