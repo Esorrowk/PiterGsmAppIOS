@@ -11,7 +11,7 @@ struct HomeView: View {
         NavigationStack {
             ScrollView{
                 // вертикальный контейнер для элементов - вертикальный стэк
-                VStack {
+                VStack(alignment: .leading) {
                     // отображения списка с картинками
                     // контейнер с горизонтальным прокрутом и полоса прокрутки скрыта
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -48,6 +48,9 @@ struct HomeView: View {
                         .padding(.horizontal)
                     
                     PopularItemsScrollPanel()
+                    
+                    InfoView()
+                        .padding(.top, 30)
                     Spacer() // очистка места под
                 }
                 .navigationTitle("PiterGsm")
