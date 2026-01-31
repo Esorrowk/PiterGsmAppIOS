@@ -136,18 +136,28 @@ struct HowToBuyView: View {
                     .foregroundStyle(Color.green)
                     .padding()
                 Text("Процедура покупки товара в нашем Интернет-магазине очень проста и состоит из нескольких шагов")
+                    .padding(20)
                 HStack{
                     Text("1.")
                         .font(.largeTitle)
                     Text("Оформление заказа")
                         .font(.largeTitle)
                 }
-                Text("После выбора товара нажмите кнопку В корзину — товар добавится в вашу корзину.")
-                Text("Далее, если вы закончили выбирать товар, нажмите кнопку ваша корзина.")
-                Text("На странице ваша корзина будут перечислены все выбранные вами товары.")
-                Text("В поле Количество вы можете изменить количество товара для покупки. После изменения количества товара необходимо нажать кнопку Пересчитать для пересчета итоговой суммы заказа.")
-                Text("В колонке Действия над каждым товаром можно произвести следующие действия: либо удалить товар из корзины, либо отложить товар на будущее.")
-                Text("Также можно ввести код скидки в соответствующее поле.")
+                VStack(alignment: .leading){
+                    Text("После выбора товара нажмите кнопку В корзину — товар добавится в вашу корзину.")
+                        .padding(.top, 3)
+                    Text("Далее, если вы закончили выбирать товар, нажмите кнопку ваша корзина.")
+                        .padding(.top, 3)
+                    Text("На странице ваша корзина будут перечислены все выбранные вами товары.")
+                        .padding(.top, 3)
+                    Text("В поле Количество вы можете изменить количество товара для покупки. После изменения количества товара необходимо нажать кнопку Пересчитать для пересчета итоговой суммы заказа.")
+                        .padding(.top, 3)
+                    Text("В колонке Действия над каждым товаром можно произвести следующие действия: либо удалить товар из корзины, либо отложить товар на будущее.")
+                        .padding(.top, 3)
+                    Text("Также можно ввести код скидки в соответствующее поле.")
+                        .padding(.top, 3)
+                }
+                .padding(20)
 
                 HStack{
                     Text("2.")
@@ -155,12 +165,37 @@ struct HowToBuyView: View {
                     Text("Оформление и подтверждение заказа")
                         .font(.largeTitle)
                 }
+                VStack(alignment: .leading){
+                        Text("После ввода необходимой информации о доставке товара (ФИО получателя, адрес доставки, контактные данные, вариант доставки, способ оплаты и т.д) для оформления заказа вам нужно нажать кнопку Оформить заказ.")
+                            .padding(.top, 3)
+                        Text("Внимание! Неправильно указанный номер телефона, неточный или неполный адрес могут привести к дополнительной задержке! Пожалуйста, внимательно проверяйте ваши персональные данные при регистрации и оформлении заказа.")
+                            .padding(.top, 3)
+                        Text("Через некоторое время (обычно в течение часа) после оформления покупки, с вами свяжется наш менеджер по контактным данным, указанным при оформлении заказа. С менеджером можно будет согласовать точное время и сроки доставки, а также уточнить детали.")
+                            .padding(.top, 3)
+                        Text("В поле Количество вы можете изменить количество товара для покупки. После изменения количества товара необходимо нажать кнопку Пересчитать для пересчета итоговой суммы заказа.")
+                            .padding(.top, 3)
+                        Text("Примечание: Для постоянных клиентов на сайте магазина есть Регистрация. В своем кабинете вы можете просмотреть содержимое корзины, историю своих заказов, а также повторить или отказаться от заказа, подписаться на рассылку новостей магазина.")
+                            .padding(.top, 3)
+                    }
+                    .padding(20)
                 HStack{
                     Text("3.")
                         .font(.largeTitle)
                     Text("Оплата и цены")
                         .font(.largeTitle)
                 }
+                VStack(alignment: .leading){
+                    Text("Цены, указанные на сайте, являются окончательными и не требуют доплат при стандартных условиях поставки. Все налоги включены в стоимость товара.")
+                        .padding(.top, 3)
+                    Text("Внимание! Для каждого отдельного заказа возможен только один способ оплаты на ваш выбор. Оплата заказа по частям различными способами невозможна.")
+                        .padding(.top, 3)
+                    Text("Возможные способы оплаты:")
+                        .padding(.top, 3)
+                    Text("Только наличный расчет")
+                        .padding(.top, 10)
+                        .bold(true)
+                }
+                .padding(20)
             }
         }
             .navigationTitle("Как купить")
@@ -168,16 +203,145 @@ struct HowToBuyView: View {
 }
 
 struct TradeInView: View {
-    var body: some View {
-        Text("Trade-in")
-            .navigationTitle("Trade-in")
+
+    enum Brand: String, CaseIterable, Identifiable {
+        case none = "Выберите бренд"
+        case iPhone, iPad, AppleWatch, Macbook
+        var id: Self { self }
     }
+    
+    let modelsWithPrices: [Brand: [String: Double]] = [
+            .iPhone: [
+                "iPhone 17 256Gb": 48_000,
+                "iPhone 17 512Gb": 58_000,
+                "iPhone 17Pro 256Gb": 72_000,
+                "iPhone 17Pro Max 256Gb": 79_000
+            ],
+            .iPad: [
+                "iPad 2025": 15_000,
+                "iPad Air 13 2025": 30_000,
+                "iPad Pro 11 2024": 40_000,
+                "iPad Pro 13 2024": 50_000
+            ],
+            .AppleWatch: [
+                "Apple Watch 10 42mm": 30000,
+                "Apple Watch 10 46mm": 32000,
+                "Apple Watch 11 42mm": 35000,
+                "Apple Watch 11 46mm": 37000
+            ],
+            .Macbook: [
+                "Macbook Air 13 M4": 120000,
+                "Macbook Air 15 M4": 140000,
+                "Macbook Air 13 M1": 90000,
+                "Macbook Air 13 M3": 100000
+            ]
+        ]
+
+
+    @State private var selectedBrand: Brand = .none
+    @State private var selectedModel: String = "Выберите модель"
+    
+    var selectedPrice: Double? {
+            modelsWithPrices[selectedBrand]?[selectedModel]
+        }
+    
+    var modelsForSelectedBrand: [String] {
+        modelsWithPrices[selectedBrand]?.keys.sorted() ?? []
+    }
+    
+    var body: some View {
+        ScrollView{
+            VStack(spacing: 20) {
+                
+                Image("TradeIn")
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(10)
+                    .padding(5)
+
+                Text("Узнайте стоимость своего устройства")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding()
+
+                // Picker Бренд
+                Picker("Бренд", selection: $selectedBrand) {
+                    ForEach(Brand.allCases) { brand in
+                        Text(brand.rawValue).tag(brand)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                .frame(maxWidth: .infinity, minHeight: 50)
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 2))
+                .padding(.horizontal)
+                .onChange(of: selectedBrand) { newValue, oldValue in
+                    selectedModel = "Выберите модель"
+                }
+                // Picker Модель
+                Picker("Модель", selection: $selectedModel) {
+                    Text("Выберите модель").tag("Выберите модель")
+                    ForEach(modelsForSelectedBrand, id: \.self) { model in
+                        Text(model).tag(model)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                .frame(maxWidth: .infinity, minHeight: 50)
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 2))
+                .padding(.horizontal)
+
+                // Показ цены
+                if let price = selectedPrice {
+                    Text("Цена: \(Int(price)) ₽")
+                        .font(.title2)
+                        .bold()
+                        .foregroundColor(.green)
+                        .padding(.top)
+                } else {
+                    Text("Выберите модель, чтобы узнать цену")
+                        .foregroundColor(.gray)
+                }
+
+                Spacer()
+            }
+        }
+           .padding(.top)
+           .navigationTitle("Trade-in")
+       }
 }
 
 struct SalesView: View {
     var body: some View {
-        Text("Акции")
-            .navigationTitle("Акции")
+        ScrollView{
+            VStack(alignment: .leading){
+                Text("Акции")
+                    .font(.largeTitle)
+                    .bold()
+                HStack{
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                }
+                .padding()
+                
+                Text("Оставь отзыв на Яндекс.картах и получи скидку 300 рублей!")
+                Text("Скрок действия акции с 01.09.2025 по 01.02.2026")
+                Image("Sales")
+                    .resizable()
+                    .scaledToFit()
+            }
+            .padding()
+        }
     }
 }
 
