@@ -4,33 +4,44 @@ import SwiftUI
 struct ProfileView: View {
     @State private var login = ""
     @State private var password = ""
+
     var body: some View {
-        VStack{
-            TextField("login", text : $login)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .frame(maxWidth: .infinity)
-                .frame(height: 30)
+        ZStack {
 
-            
-            SecureField("password", text : $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .frame(maxWidth: .infinity)
+            Image("ProfileFon")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
 
-            
-            Button("Войти"){
+            // Затемнение
+            Color.black.opacity(0.4)
+                .ignoresSafeArea()
+
+            VStack(spacing: 16) {
+                Spacer()
+
+                TextField("login", text: $login)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(height: 44)
+
+                SecureField("password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(height: 44)
+
+                Button("Войти") {
+                }
+                .frame(height: 44)
+                .frame(maxWidth: .infinity)
+                .background(Color.green)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+
+                Spacer()
             }
-            .frame(maxWidth: .infinity)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .frame(maxWidth: 350)
             .padding()
-            .background(Color.green)
-            .buttonStyle(.plain)
-            .cornerRadius(10)
-
         }
-            .navigationTitle("Вход с паролем")
-            .navigationBarTitleDisplayMode(.large)
-
+        .navigationTitle("Вход с паролем")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
-
-
