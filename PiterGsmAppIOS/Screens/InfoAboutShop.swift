@@ -133,6 +133,7 @@ struct HowToBuyView: View {
             VStack(alignment: .leading){
                 Text("Как купить")
                     .font(.largeTitle)
+                    .bold()
                     .foregroundStyle(Color.green)
                     .padding()
                 Text("Процедура покупки товара в нашем Интернет-магазине очень проста и состоит из нескольких шагов")
@@ -143,6 +144,7 @@ struct HowToBuyView: View {
                     Text("Оформление заказа")
                         .font(.largeTitle)
                 }
+                .padding(.leading)
                 VStack(alignment: .leading){
                     Text("После выбора товара нажмите кнопку В корзину — товар добавится в вашу корзину.")
                         .padding(.top, 3)
@@ -165,6 +167,7 @@ struct HowToBuyView: View {
                     Text("Оформление и подтверждение заказа")
                         .font(.largeTitle)
                 }
+                .padding(.leading)
                 VStack(alignment: .leading){
                         Text("После ввода необходимой информации о доставке товара (ФИО получателя, адрес доставки, контактные данные, вариант доставки, способ оплаты и т.д) для оформления заказа вам нужно нажать кнопку Оформить заказ.")
                             .padding(.top, 3)
@@ -184,6 +187,7 @@ struct HowToBuyView: View {
                     Text("Оплата и цены")
                         .font(.largeTitle)
                 }
+                .padding(.leading)
                 VStack(alignment: .leading){
                     Text("Цены, указанные на сайте, являются окончательными и не требуют доплат при стандартных условиях поставки. Все налоги включены в стоимость товара.")
                         .padding(.top, 3)
@@ -347,7 +351,75 @@ struct SalesView: View {
 
 struct ContactsView: View {
     var body: some View {
-        Text("Контакты")
+        ScrollView{
+            VStack(alignment: .leading){
+                Text("Контакты")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.bottom, 50)
+                Text("Адрес розничного магазина")
+                    .foregroundStyle(Color.gray)
+                    .padding(.bottom, 5)
+                Text("Санкт-Петербург, м. Площадь Восстания, ул. 2-я Cоветская, 7БЦ «Сенатор», офис 107")
+                Link(destination: URL (string: "https://yandex.ru/maps/-/CDV8E822")!){
+                    Text("Яндекс Карты")
+                        .bold()
+                        .foregroundStyle(Color.green)
+                }
+                .padding(.top, 5)
+                .padding(.bottom, 20)
+                Text("Время работы магазина")
+                    .foregroundStyle(Color.gray)
+                    .padding(.bottom, 5)
+                Text("ПН-ВС: с 11.00 до 19.00")
+                    .padding(.bottom, 20)
+                Text("Call-центр")
+                    .foregroundStyle(Color.gray)
+                    .padding(5)
+                Text("+7 (812) 244-00-88")
+                    .foregroundStyle(Color.green)
+                    .padding(.bottom, 20)
+                Text("Время работы call-центра")
+                    .padding(.bottom,5)
+                Text("ПН-ВС: с 09.00 до 21.00")
+                    .padding(.bottom, 20)
+                Text("Email")
+                    .foregroundStyle(Color.gray)
+                    .padding(.bottom, 5)
+                    .buttonStyle(.plain)
+                Text("zakaz@pitergsm.ru")
+                    .foregroundStyle(Color.green)
+                    .padding(.bottom, 5)
+                Text("Соц. сети")
+                    .foregroundStyle(Color.gray)
+                    .padding(.top, 20)
+                HStack{
+                    Link(destination: URL(string: "https://t.me/pitergsmchat")!){
+                        Image(systemName: "paperplane")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .tint(.primary)
+                            .padding(.trailing,20)
+                    }
+                    Link(destination: URL(string: "https://wa.me/message/AQC4UZPSQSCAO1")!){
+                        Image(systemName: "phone.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .tint(.primary)
+                            .padding(.trailing,20)
+                    }
+                    Link(destination: URL(string: "https://vk.com/pitergsm")!){
+                        Image("VK")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .tint(.primary)
+                    }
+                }
+            }
+        }
             .navigationTitle("Контакты")
     }
 }
