@@ -23,10 +23,10 @@ struct NewItemScrollPanel: View {
             // картинка
             Image(newItemScrollList[currentIndex].imageName)
                 .resizable()
-                .scaledToFit()
+                .scaledToFill()
                 .frame(height: 250)
                 .frame(maxWidth: .infinity)
-                .cornerRadius(12)
+                .clipped()
             
             // стрелки поверх картинки
             HStack {
