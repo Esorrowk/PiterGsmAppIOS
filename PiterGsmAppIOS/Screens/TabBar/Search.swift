@@ -22,7 +22,7 @@ struct SearchView: View {
                     .textFieldStyle(.roundedBorder)
                     .padding()
                 ScrollView(.vertical, showsIndicators: true){
-                    VStack{
+                    VStack(alignment: .leading){
                         ForEach(filteredCategories){item in
                             NavigationLink(destination: item.destination){
                                 VStack{
@@ -37,9 +37,9 @@ struct SearchView: View {
                             }
                             .buttonStyle(.plain)
                             Divider()
-                                .padding(.leading, 56)
                         }
                     }
+                    .padding(.leading, 20)
                 }
                 
                 Spacer()
