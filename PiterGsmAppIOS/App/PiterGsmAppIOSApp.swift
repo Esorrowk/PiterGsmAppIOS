@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct PiterGsmAppIOSApp: App {
+    @State private var favoritesManager = FavoritesManager()
     var body: some Scene {
         WindowGroup {
             MainView()
+                .environment(favoritesManager) // передаем в окружение
         }
     }
 }

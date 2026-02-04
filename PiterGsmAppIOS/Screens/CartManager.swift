@@ -1,7 +1,7 @@
 import SwiftUI
 
 @Observable
-class CartManager {
+final class CartManager {
     var items: [Product] = []
     
     func addToCart(product: Product) {

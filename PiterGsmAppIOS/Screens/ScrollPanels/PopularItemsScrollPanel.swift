@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PopularItemsScrollPanel: View {
+    @Environment(FavoritesManager.self) private var favorites
     // Полный список популярных товаров
     let popularItems: [Product] = [
         Product(name: "AirPods Pro 2", description: "Беспроводные наушники Apple AirPods 2 (2023) MagSafe Charging Cast (USB-C) MTJV3", imageName: "AirPodsPro2", price: 16_990),
@@ -29,7 +30,7 @@ struct PopularItemsScrollPanel: View {
                             Image(item.imageName)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 250, height: 250)
+                                .frame(width: 180, height: 180)
                                 .cornerRadius(12)
                             
                             Text(item.name)
@@ -39,6 +40,12 @@ struct PopularItemsScrollPanel: View {
                             Text("\(item.price) ₽")
                                 .font(.headline)
                                 .foregroundColor(.black)
+                            Button {
+                                favorites.toggle(item)
+                            } label:{
+                                Image(systemName: favorites.isFavorites(item) ? "heart.fill" : "heart")
+                                    .foregroundColor(.green)
+                            }
                         }
                         .padding()
                         .frame(width: 270)

@@ -5,6 +5,7 @@ struct ProductsDetailsView: View {
 
     @State private var showAddToBasket: Bool = false
     @Environment(CartManager.self) private var cartManager
+    @Environment(FavoritesManager.self) private var favorites
 
     var body: some View {
         ScrollView {
@@ -32,6 +33,16 @@ struct ProductsDetailsView: View {
                         .font(.title2)
                         .bold()
                         .foregroundColor(.black)
+                    Button {
+                        favorites.toggle(product)
+                    } label:{
+                        Image(systemName:
+                            favorites.isFavorites(product)
+                            ? "heart.fill"
+                            : "heart"
+                        )
+                        .foregroundColor(.green)
+                    }
                 }
                 .padding()
                 .background(Color.white) // Белый фон карточки
@@ -85,6 +96,7 @@ struct ProductsDetailsView: View {
 // Универсальная карточка
 struct ProductCardView: View {
     let product: Product
+    @Environment(FavoritesManager.self) private var favorites
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -102,6 +114,16 @@ struct ProductCardView: View {
             Text("\(product.price) ₽")
                 .font(.headline)
                 .foregroundColor(.blue)
+            Button {
+                favorites.toggle(product)
+            } label:{
+                Image(systemName:
+                    favorites.isFavorites(product)
+                    ? "heart.fill"
+                    : "heart"
+                )
+                .foregroundColor(.green)
+            }
         }
         .padding()
         .background(Color(.systemGray6))
