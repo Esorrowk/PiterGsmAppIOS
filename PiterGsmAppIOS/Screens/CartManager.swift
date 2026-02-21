@@ -2,7 +2,7 @@ import SwiftUI
 
 @Observable
 final class CartManager {
-    var items: [Product] = []
+    private(set) var items: [Product] = []
     
     func addToCart(product: Product) {
         items.append(product)
