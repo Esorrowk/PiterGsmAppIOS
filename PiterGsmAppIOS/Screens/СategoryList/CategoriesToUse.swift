@@ -6,13 +6,26 @@ struct Category: Identifiable {
     let id = UUID()
     let title: String
     let imageName: String
-    let destination: AnyView
+    let destination: CategoryView
 }
+
+struct CategoryView: View {
+    category: Category
+
+    var body: {
+        if case category = .iphone {
+            Text("iPhone Title")
+        } else if case category = .ipad {
+            Text("iPad Title")
+        } 
+    }
+}
+
 // список с картинками
 let categoryList: [Category] = [
-    Category(title: "iPhone", imageName: "iPhone", destination: AnyView(IPhoneScreenView())),
-    Category(title: "iPad", imageName: "iPad", destination: AnyView(IPadScreenView())),
-    Category(title: "Mac", imageName: "Mac", destination: AnyView(MacScreenView())),
+    Category(title: "iPhone", imageName: "iPhone", destination: CategoryView(category: .iphone),
+    Category(title: "iPad", imageName: "iPad", destination: CategoryView(category: .ipad),
+    Category(title: "Mac", imageName: "Mac", destination: CategoryView(category: .mac),
     Category(title: "Умные часы", imageName: "appleWatch", destination: AnyView(AppleWatchScreenView())),
     Category(title: "Аудио", imageName: "Audio", destination: AnyView(AudioScreenView())),
     Category(title: "Смартфоны", imageName: "smartphone", destination: AnyView(SmartPhoneScreenView())),
